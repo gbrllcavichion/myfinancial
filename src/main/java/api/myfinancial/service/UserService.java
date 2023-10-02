@@ -20,4 +20,19 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
+    public User update(String id, User user) {
+        User updated = this.userRepository.findById(id).get();
+        updated.setName(user.getName());
+        updated.setEmail(user.getEmail());
+        updated.setContact(user.getContact());
+        updated.setPassword(user.getPassword());
+
+        return this.userRepository.save(updated);
+    }
+
+    public User delete(String id) {
+        User user = this.userRepository.findById(id).get();
+        this.userRepository.deleteById(id);
+        return user;
+    }
 }
