@@ -5,7 +5,7 @@ import api.myfinancial.dto.*;
 
 import java.util.*;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends UserService {
     private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -13,12 +13,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAll() {
         return null;
     }
 
     @Override
-    public User createUser(User user) {
+    public User create(User user) {
         return null;
     }
 }
