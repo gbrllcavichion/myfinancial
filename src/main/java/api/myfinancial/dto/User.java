@@ -1,7 +1,5 @@
 package api.myfinancial.dto;
 
-
-import api.myfinancial.model.*;
 import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.*;
@@ -20,5 +18,5 @@ public class User {
     private String contact;
     private String password;
 
-    private AccountBalance balance;
+    private double balance;
 }
