@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
         updated.setEmail(user.getEmail());
         updated.setContact(user.getContact());
         updated.setPassword(user.getPassword());
-        updated.setBalance(user.getBalance());
 
         return this.userRepository.save(updated);
     }
@@ -46,5 +45,6 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(String id) {
         return userRepository.findById(id);
     }
+
 
 }

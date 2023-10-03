@@ -15,6 +15,9 @@ public class ExpenseController {
     @Autowired
     private ExpenseService expenseService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/{userId}")
     public List<Expense> getAllExpenses(@PathVariable String userId) {
         return expenseService.getAllExpenses(userId);
@@ -23,7 +26,12 @@ public class ExpenseController {
     @PostMapping("/add/{userId}")
     public ResponseEntity<String> addExpense(@PathVariable String userId, @RequestBody Expense expense) {
         Expense addedExpense = expenseService.addExpense(userId, expense);
-        return ResponseEntity.ok("Expense added successfully with ID: " + addedExpense.getId());
+
+        User user = userService.findById(userId).orElse(null);
+        double updatedBalance = user != null ? user.getBalance() : 0.0;
+
+        return ResponseEntity.ok("Expense added successfully with ID: " + addedExpense.getId() + ". Updated Balance: " + updatedBalance);
+
     }
 
 }
