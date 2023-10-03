@@ -23,9 +23,22 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseRepository.findAll();
     }
 
-    //todo:
     @Override
     public Expense addExpense(String userId, Expense expense) {
-        return null;
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        expense.setUser(user);
+
+        if (expense.getDate() == null) {
+            expense.setDate(new Date());
+        }
+
+        Expense addedExpense = expenseRepository.save(expense);
+
+        double expenseAmount = expense.getAmount();
+        user.setBalance(user.getBalance() - expenseAmount);
+        userRepository.save(user);
+
+        return addedExpense;
     }
 }
