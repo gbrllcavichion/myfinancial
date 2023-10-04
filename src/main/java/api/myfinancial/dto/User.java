@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.*;
 
+import java.util.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,6 +19,8 @@ public class User {
     private String email;
     private String contact;
     private String password;
-
     private double balance;
+
+    @DBRef
+    private List<Expense> expenses = new ArrayList<>();
 }

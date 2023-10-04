@@ -20,14 +20,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public List<Expense> getAllExpenses(String userId) {
-        return expenseRepository.findAll();
+        return expenseRepository.findByUserId(userId);
     }
 
     @Override
     public Expense addExpense(String userId, Expense expense) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
-
-        expense.setUser(user);
 
         if (expense.getDate() == null) {
             expense.setDate(new Date());

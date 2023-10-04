@@ -23,15 +23,23 @@ public class ExpenseController {
         return expenseService.getAllExpenses(userId);
     }
 
-    @PostMapping("/add/{userId}")
-    public ResponseEntity<String> addExpense(@PathVariable String userId, @RequestBody Expense expense) {
-        Expense addedExpense = expenseService.addExpense(userId, expense);
+    //todo:
+    //expenses returning empty
 
+    @PostMapping("user/{userId}")
+    public ResponseEntity<String> addExpenseToUser(@PathVariable String userId, @RequestBody Expense expense) {
         User user = userService.findById(userId).orElse(null);
-        double updatedBalance = user != null ? user.getBalance() : 0.0;
 
-        return ResponseEntity.ok("Expense added successfully with ID: " + addedExpense.getId() + ". Updated Balance: " + updatedBalance);
+        if (user != null) {
+            user.getExpenses().add(expense);
 
+            userService.update(userId, user);
+
+            return ResponseEntity.ok("Expense added to user successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
 
 }
