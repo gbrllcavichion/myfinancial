@@ -31,6 +31,8 @@ public class ExpenseServiceImpl implements ExpenseService {
             expense.setDate(new Date());
         }
 
+        user.getExpenses().add(expense);
+
         Expense addedExpense = expenseRepository.save(expense);
 
         double expenseAmount = expense.getAmount();

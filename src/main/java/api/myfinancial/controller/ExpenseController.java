@@ -23,8 +23,6 @@ public class ExpenseController {
         return expenseService.getAllExpenses(userId);
     }
 
-    //todo:
-    //expenses returning empty
 
     @PostMapping("user/{userId}")
     public ResponseEntity<String> addExpenseToUser(@PathVariable String userId, @RequestBody Expense expense) {
@@ -32,6 +30,8 @@ public class ExpenseController {
 
         if (user != null) {
             user.getExpenses().add(expense);
+
+            expenseService.addExpense(userId, expense);
 
             userService.update(userId, user);
 
