@@ -10,12 +10,11 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "expenses")
-public class Expense {
+@Document(collection = "earning")
+public class Earning {
 
     @Id
     private String id;
     private double amount;
-    private String category;
     private Date date;
 }

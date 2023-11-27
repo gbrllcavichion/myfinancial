@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/expenses")
-public class ExpenseController {
+@RequestMapping("/balance")
+public class BalanceController {
+
+    @Autowired
+    private EarningService earningService;
 
     @Autowired
     private ExpenseService expenseService;
@@ -23,8 +26,7 @@ public class ExpenseController {
         return expenseService.getAllExpenses(userId);
     }
 
-
-    @PostMapping("user/{userId}")
+    @PostMapping("expense/{userId}")
     public ResponseEntity<String> addExpenseToUser(@PathVariable String userId, @RequestBody Expense expense) {
         User user = userService.findById(userId).orElse(null);
 
@@ -36,6 +38,23 @@ public class ExpenseController {
             userService.update(userId, user);
 
             return ResponseEntity.ok("Expense added to user successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("earning/{userId}")
+    public ResponseEntity<String> addEarningToUser(@PathVariable String userId, @RequestBody Earning earning) {
+        User user = userService.findById(userId).orElse(null);
+
+        if (user != null) {
+            user.getEarnings().add(earning);
+
+            earningService.addEarning(userId, earning);
+
+            userService.update(userId, user);
+
+            return ResponseEntity.ok("Earning added to user successfully.");
         } else {
             return ResponseEntity.notFound().build();
         }
