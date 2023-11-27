@@ -10,17 +10,12 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "users")
-public class User {
+@Document(collection = "expenses")
+public class Expense {
 
     @Id
     private String id;
-    private String name;
-    private String email;
-    private String contact;
-    private String password;
-    private double balance;
-
-    @DBRef
-    private List<Expense> expenses = new ArrayList<>();
+    private String description;
+    private double amount;
+    private Date date;
 }
