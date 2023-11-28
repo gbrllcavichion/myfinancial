@@ -20,7 +20,13 @@ public class EarningServiceImpl implements EarningService {
 
     @Override
     public List<Earning> getAllEarnings(String userId) {
-        return earningRepository.findByUserId(userId);
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user != null) {
+            return user.getEarnings();
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
     }
 
     @Override
