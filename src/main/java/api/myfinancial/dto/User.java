@@ -21,9 +21,7 @@ public class User {
     private String password;
     private double balance;
 
-    @DBRef
     private List<Expense> expenses = new ArrayList<>();
-    @DBRef
     private List<Earning> earnings = new ArrayList<>();
 
 }

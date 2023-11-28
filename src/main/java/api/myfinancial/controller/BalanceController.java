@@ -21,7 +21,7 @@ public class BalanceController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{userId}")
+    @GetMapping("getAllExpenses/{userId}")
     public List<Expense> getAllExpenses(@PathVariable String userId) {
         return expenseService.getAllExpenses(userId);
     }
