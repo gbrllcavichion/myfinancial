@@ -26,6 +26,11 @@ public class BalanceController {
         return expenseService.getAllExpenses(userId);
     }
 
+    @GetMapping("getAllEarnings/{userId}")
+    public List<Earning> getAlEarning(@PathVariable String userId) {
+        return earningService.getAllEarnings(userId);
+    }
+
     @PostMapping("expense/{userId}")
     public ResponseEntity<String> addExpenseToUser(@PathVariable String userId, @RequestBody Expense expense) {
         User user = userService.findById(userId).orElse(null);
