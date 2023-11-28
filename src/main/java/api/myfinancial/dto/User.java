@@ -23,4 +23,7 @@ public class User {
 
     @DBRef
     private List<Expense> expenses = new ArrayList<>();
+    @DBRef
+    private List<Earning> earnings = new ArrayList<>();
+
 }
