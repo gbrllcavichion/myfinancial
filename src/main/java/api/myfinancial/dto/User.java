@@ -23,5 +23,6 @@ public class User {
 
     private List<Expense> expenses = new ArrayList<>();
     private List<Earning> earnings = new ArrayList<>();
+    private List<Investment> investments = new ArrayList<>();
 
 }
