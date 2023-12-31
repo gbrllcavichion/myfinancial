@@ -1,4 +1,4 @@
-package api.myfinancial.service;
+package api.myfinancial.service.earning;
 
 import api.myfinancial.dto.*;
 
