@@ -18,6 +18,7 @@ public class Investment {
     private Date date;
     private String description;
     private double valueBefore;
+    private double amountToAdd;
     private double amoundAdded;
     private double totalAmountInvested;
 

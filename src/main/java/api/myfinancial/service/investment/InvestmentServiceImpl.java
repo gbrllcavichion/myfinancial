@@ -19,7 +19,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     private final UserRepository userRepository;
 
     @Override
-    public List<Investment> getAllInvestments(String userId) {
+    public List<Investment> getAllInvestments(String userId){
         User user = userRepository.findById(userId).orElse(null);
 
         if (user != null) {
@@ -29,4 +29,23 @@ public class InvestmentServiceImpl implements InvestmentService {
         }
     }
 
+    @Override
+    public void addInvestment(String userId, Investment investment){
+        User user = userRepository.findById(userId).orElse(null);
+
+        if(user != null) {
+            Investment newInvestment = new Investment();
+            newInvestment.setDate(new Date());
+            newInvestment.setDescription(newInvestment.getDescription());
+            newInvestment.setValueBefore(user.getTotalInvestment());
+            newInvestment.setAmoundAdded(investment.getAmountToAdd());
+            user.setTotalInvestment(user.getTotalInvestment() + investment.getAmountToAdd());
+            newInvestment.setTotalAmountInvested(user.getTotalInvestment());
+
+            user.getInvestments().add(newInvestment);
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
+    }
 }

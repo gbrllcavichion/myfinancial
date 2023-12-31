@@ -6,4 +6,6 @@ import java.util.*;
 
 public interface InvestmentService {
     List<Investment> getAllInvestments(String userId);
+    void addInvestment(String userId, Investment investment);
+
 }
