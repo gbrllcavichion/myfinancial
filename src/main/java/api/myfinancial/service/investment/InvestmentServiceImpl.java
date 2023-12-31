@@ -37,11 +37,12 @@ public class InvestmentServiceImpl implements InvestmentService {
             Investment newInvestment = new Investment();
             newInvestment.setDate(new Date());
             newInvestment.setDescription(newInvestment.getDescription());
-            newInvestment.setValueBefore(user.getTotalInvestment());
+            newInvestment.setValueBefore(investment.getCurrentBalance());
             newInvestment.setAmoundAdded(investment.getAmountToAdd());
-            user.setTotalInvestment(user.getTotalInvestment() + investment.getAmountToAdd());
-            newInvestment.setTotalAmountInvested(user.getTotalInvestment());
+            double totalInvestment = investment.getCurrentBalance() + investment.getAmountToAdd();
+            newInvestment.setTotalAmountInvested(totalInvestment);
 
+            user.setTotalInvestment(totalInvestment);
             user.getInvestments().add(newInvestment);
             userRepository.save(user);
         } else {
