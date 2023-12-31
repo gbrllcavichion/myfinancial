@@ -1,4 +1,4 @@
-package api.myfinancial.service;
+package api.myfinancial.service.expense;
 
 import api.myfinancial.domain.*;
 import api.myfinancial.dto.*;
@@ -10,41 +10,41 @@ import java.util.*;
 
 @AllArgsConstructor
 @Service
-public class EarningServiceImpl implements EarningService {
+public class ExpenseServiceImpl implements ExpenseService {
 
     @Autowired
-    private final EarningRepository earningRepository;
+    private final ExpenseRepository expenseRepository;
 
     @Autowired
     private final UserRepository userRepository;
 
     @Override
-    public List<Earning> getAllEarnings(String userId) {
+    public List<Expense> getAllExpenses(String userId) {
         User user = userRepository.findById(userId).orElse(null);
 
         if (user != null) {
-            return user.getEarnings();
+            return user.getExpenses();
         } else {
             throw new IllegalArgumentException("User not found");
         }
     }
 
     @Override
-    public Earning addEarning(String userId, Earning earning) {
+    public Expense addExpense(String userId, Expense expense) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        if (earning.getDate() == null) {
-            earning.setDate(new Date());
+        if (expense.getDate() == null) {
+            expense.setDate(new Date());
         }
 
-        user.getEarnings().add(earning);
+        user.getExpenses().add(expense);
 
-        Earning addedEarning = earningRepository.save(earning);
+        Expense addedExpense = expenseRepository.save(expense);
 
-        double earningAmount = earning.getAmount();
-        user.setBalance(user.getBalance() + earningAmount);
+        double expenseAmount = expense.getAmount();
+        user.setBalance(user.getBalance() - expenseAmount);
         userRepository.save(user);
 
-        return addedEarning;
+        return addedExpense;
     }
 }

@@ -20,8 +20,10 @@ public class User {
     private String contact;
     private String password;
     private double balance;
+    private double totalInvestment;
 
     private List<Expense> expenses = new ArrayList<>();
     private List<Earning> earnings = new ArrayList<>();
+    private List<Investment> investments = new ArrayList<>();
 
 }

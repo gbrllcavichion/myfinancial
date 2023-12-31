@@ -1,7 +1,7 @@
 package api.myfinancial.controller;
 
 import api.myfinancial.dto.*;
-import api.myfinancial.service.*;
+import api.myfinancial.service.user.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
